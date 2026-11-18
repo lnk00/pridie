@@ -23,7 +23,7 @@ Without it, the form only shows its success state and **signups are not saved**.
 - `src/styles/global.css`: design tokens (colors, fonts, shadows) and the few custom animations.
 - `src/components/sections/`: one file per page section, assembled in `src/pages/index.astro`.
 - `src/components/mockups/`: product UI drawn in HTML. Edit the copy and data at the top of each file.
-- `src/components/ui/`: icons, tool logos, handwritten annotations, section headings.
+- `src/components/ui/`: icons, tool logos, the Ori mascot (`SunMascot`, `OriNote`), section headings.
 
 ## Content rule
 

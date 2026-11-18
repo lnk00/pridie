@@ -1,6 +1,5 @@
 ---
 import WaitlistForm from '../WaitlistForm.astro';
-import Annotation from '../ui/Annotation.astro';
 import Icon from '../ui/Icon.astro';
 import SunMascot from '../ui/SunMascot.astro';
 import HeroDashboard from '../mockups/HeroDashboard.astro';
@@ -20,18 +19,11 @@ import HeroDashboard from '../mockups/HeroDashboard.astro';
         class="reveal mt-7 font-display text-[3.5rem] leading-[0.95] tracking-[-0.02em] text-balance sm:text-7xl lg:text-[6.5rem]"
         style="--reveal-delay:80ms"
       >
-        Everything ready <em class="relative text-sun">
-          the day before.
-          <span aria-hidden="true" class="absolute top-full right-0 mt-1 hidden translate-x-1/4 lg:flex">
-            <Annotation arrow="up-left" arrowSide="start">
-              pridie (lat.): the day before
-            </Annotation>
-          </span>
-        </em>
+        Everything ready <em class="text-sun">the day before.</em>
       </h1>
 
       <p
-        class="reveal mx-auto mt-7 max-w-2xl text-lg leading-relaxed text-pretty text-ink-muted sm:text-xl lg:mt-16"
+        class="reveal mx-auto mt-7 max-w-2xl text-lg leading-relaxed text-pretty text-ink-muted sm:text-xl"
         style="--reveal-delay:160ms"
       >
         Pridie sets up your new hire's accounts, gives them a clear checklist, and answers their
@@ -41,7 +33,7 @@ import HeroDashboard from '../mockups/HeroDashboard.astro';
 
       <div class="reveal mt-8 flex flex-col items-center" style="--reveal-delay:240ms">
         <WaitlistForm id="join" />
-        <p class="font-hand text-xl text-ink-muted lg:hidden">pridie (lat.): the day before</p>
+        <p class="font-display text-lg text-ink-muted"><em class="text-ink-soft">pridie</em> (Latin): the day before</p>
       </div>
     </div>
 
@@ -70,9 +62,6 @@ import HeroDashboard from '../mockups/HeroDashboard.astro';
           Engineering handbook
         </p>
       </div>
-      <span aria-hidden="true" class="absolute -top-9 left-6 z-20 hidden sm:block lg:-left-4">
-        <Annotation arrow="down-right">accounts ready before Monday</Annotation>
-      </span>
     </div>
   </div>
 </section>

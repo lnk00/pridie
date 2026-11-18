@@ -1,6 +1,5 @@
 ---
 import SectionHeading from '../ui/SectionHeading.astro';
-import Annotation from '../ui/Annotation.astro';
 import Icon from '../ui/Icon.astro';
 import AssistantChat from '../mockups/AssistantChat.astro';
 
@@ -42,14 +41,6 @@ const points = [
 
       <div class="reveal relative mx-auto mt-16 max-w-3xl sm:mt-20" style="--reveal-delay:120ms">
         <AssistantChat />
-        <Annotation
-          arrow="down-left"
-          arrowSide="start"
-          aria-hidden="true"
-          class="absolute -top-11 right-2 sm:right-6"
-        >
-          knows what Sam is working on
-        </Annotation>
       </div>
 
       <ul class="mt-16 grid gap-x-8 gap-y-10 sm:grid-cols-2 lg:mt-20 lg:grid-cols-4">

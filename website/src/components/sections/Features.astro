@@ -1,6 +1,6 @@
 ---
 import SectionHeading from '../ui/SectionHeading.astro';
-import Annotation from '../ui/Annotation.astro';
+import OriNote from '../ui/OriNote.astro';
 import Icon from '../ui/Icon.astro';
 import ProvisioningMock from '../mockups/ProvisioningMock.astro';
 import ChecklistMock from '../mockups/ChecklistMock.astro';
@@ -18,7 +18,7 @@ const features = [
       'Slack and Linear use that email.',
       'No access requests on day one.',
     ],
-    note: 'Google first, then the rest',
+    note: 'Google goes first: it creates the email that Slack and Linear use.',
     mock: ProvisioningMock,
   },
   {
@@ -32,7 +32,7 @@ const features = [
       'Clear expectations for every task.',
       'Progress the admin can follow.',
     ],
-    note: 'no more guessing',
+    note: "Every task says what's expected, so nobody has to guess.",
     mock: ChecklistMock,
   },
   {
@@ -46,7 +46,7 @@ const features = [
       'The steps where new hires get blocked.',
       "Topics your docs don't cover yet.",
     ],
-    note: 'time to fix the setup script',
+    note: 'Most new hires get stuck on local setup. Time to fix that script.',
     mock: InsightsMock,
   },
 ];
@@ -92,17 +92,10 @@ const features = [
               <div class:list={['reveal relative', flipped && 'lg:order-1']} style="--reveal-delay:120ms">
                 <div class="bg-dots rounded-4xl border border-line bg-paper-deep p-3 sm:p-8 lg:p-10">
                   <div class="mx-auto max-w-md">
+                    <OriNote class="mb-4">{feature.note}</OriNote>
                     <Mock />
                   </div>
                 </div>
-                <Annotation
-                  arrow={flipped ? 'down-left' : 'down-right'}
-                  arrowSide={flipped ? 'start' : 'end'}
-                  aria-hidden="true"
-                  class:list={['absolute -top-8', flipped ? 'right-8' : 'left-8']}
-                >
-                  {feature.note}
-                </Annotation>
               </div>
             </article>
           );

@@ -1,0 +1,22 @@
+---
+// A short note from Ori, pinned next to a product mockup.
+import SunMascot from './SunMascot.astro';
+
+interface Props {
+  class?: string;
+}
+
+const { class: className } = Astro.props;
+---
+
+<div
+  class:list={[
+    'flex w-fit max-w-xs items-start gap-2.5 rounded-2xl rounded-tl-md border border-line bg-white px-3.5 py-3 text-left shadow-float',
+    className,
+  ]}
+>
+  <span class="grid size-7 shrink-0 place-items-center rounded-lg bg-sun-soft">
+    <SunMascot pose="avatar" class="size-5.5" />
+  </span>
+  <p class="pt-0.5 text-sm leading-snug text-ink-soft"><slot /></p>
+</div>
