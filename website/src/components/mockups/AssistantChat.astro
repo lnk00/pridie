@@ -1,23 +1,23 @@
 ---
 import Icon from '../ui/Icon.astro';
-import Mark from '../ui/Mark.astro';
+import SunMascot from '../ui/SunMascot.astro';
 
 const sources = ['Engineering handbook › Local setup', 'Security policy › Secrets'];
 ---
 
 <div
   role="img"
-  aria-label="Example conversation with the Pridie assistant. Sam is on the task Set up the local environment and asks where to get the API keys. The assistant answers with two sources. Sam then asks about working from home on Fridays. The assistant says it found no answer in the documentation and suggests asking the manager."
+  aria-label="Example conversation with Ori, the Pridie assistant. Ori says hello. Sam is on the task Set up the local environment and asks where to get the API keys. The assistant answers with two sources. Sam then asks about working from home on Fridays. The assistant says it found no answer in the documentation and suggests asking the manager."
   class="overflow-hidden rounded-3xl border border-line bg-white text-left shadow-float"
 >
   <div class="flex flex-wrap items-center justify-between gap-3 border-b border-line px-4 py-3 sm:px-5">
     <div class="flex items-center gap-2.5">
-      <span class="grid size-8 place-items-center rounded-xl bg-ink text-paper">
-        <Mark class="size-4.5" />
+      <span class="grid size-8 place-items-center rounded-xl bg-sun-soft">
+        <SunMascot pose="avatar" class="size-6" />
       </span>
       <div>
-        <p class="text-sm leading-tight font-medium">Assistant</p>
-        <p class="text-xs text-ink-muted">Answers from your company's knowledge</p>
+        <p class="text-sm leading-tight font-medium">Ori</p>
+        <p class="text-xs text-ink-muted">Your onboarding assistant</p>
       </div>
     </div>
     <span class="inline-flex items-center gap-1.5 rounded-full bg-sun-soft px-2.5 py-1 text-xs font-medium text-sun-deep">
@@ -27,13 +27,22 @@ const sources = ['Engineering handbook › Local setup', 'Security policy › Se
   </div>
 
   <div class="space-y-5 px-4 py-6 sm:px-6">
+    <div class="flex gap-3">
+      <span class="grid size-7 shrink-0 place-items-center rounded-lg bg-sun-soft">
+        <SunMascot pose="avatar" class="size-5.5" />
+      </span>
+      <p class="pt-1 text-sm leading-relaxed text-ink-soft">
+        Hi Sam, I'm Ori. Ask me anything about your onboarding. I answer from your company's docs.
+      </p>
+    </div>
+
     <p class="ml-auto w-fit max-w-[85%] rounded-2xl rounded-br-md bg-ink px-4 py-2.5 text-sm text-paper">
       Where do I get the API keys for my local environment?
     </p>
 
     <div class="flex gap-3">
-      <span class="grid size-7 shrink-0 place-items-center rounded-lg bg-ink text-paper">
-        <Mark class="size-4" />
+      <span class="grid size-7 shrink-0 place-items-center rounded-lg bg-sun-soft">
+        <SunMascot pose="avatar" class="size-5.5" />
       </span>
       <div class="min-w-0 flex-1">
         <p class="text-sm leading-relaxed text-ink-soft">
@@ -59,8 +68,8 @@ const sources = ['Engineering handbook › Local setup', 'Security policy › Se
     </p>
 
     <div class="flex gap-3">
-      <span class="grid size-7 shrink-0 place-items-center rounded-lg bg-ink text-paper">
-        <Mark class="size-4" />
+      <span class="grid size-7 shrink-0 place-items-center rounded-lg bg-sun-soft">
+        <SunMascot pose="avatar" class="size-5.5" />
       </span>
       <div class="min-w-0 flex-1">
         <p class="text-sm leading-relaxed text-ink-soft">

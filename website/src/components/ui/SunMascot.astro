@@ -1,0 +1,87 @@
+---
+// Ori, the Pridie mascot and assistant: the sun from the logo, with a face.
+// - peek: rising over an edge. Place it so its bottom sits on the edge it peeks over.
+// - avatar: small round sun face, for chat avatars.
+// - face: only the face, to put on a larger sun shape.
+interface Props {
+  pose: 'peek' | 'avatar' | 'face';
+  class?: string;
+}
+
+const { pose, class: className } = Astro.props;
+
+const ink = '#1A1918';
+const sun = '#E8461E';
+const blush = '#FF9478';
+
+// Short rays from radius r1 to r2 around (cx, cy), one per angle in degrees.
+const raysAround = (cx: number, cy: number, r1: number, r2: number, angles: number[]) =>
+  angles.map((deg) => {
+    const rad = (deg * Math.PI) / 180;
+    const point = (r: number) => [cx + r * Math.cos(rad), cy - r * Math.sin(rad)].map((n) => n.toFixed(2));
+    const [x1, y1] = point(r1);
+    const [x2, y2] = point(r2);
+    return { x1, y1, x2, y2 };
+  });
+
+// Peek: only the rays above the edge. Avatar: a full ring, so it reads as a sun at 20px.
+const rays = raysAround(80, 100, 62, 74, [25, 47, 69, 90, 111, 133, 155]);
+const avatarRays = raysAround(16, 16, 12.8, 15.2, [0, 45, 90, 135, 180, 225, 270, 315]);
+---
+
+{
+  pose === 'peek' && (
+    <svg viewBox="0 0 160 88" class={className} aria-hidden="true">
+      <g stroke={sun} stroke-width="5" stroke-linecap="round">
+        {rays.map((ray) => (
+          <line x1={ray.x1} y1={ray.y1} x2={ray.x2} y2={ray.y2} />
+        ))}
+      </g>
+      <circle cx="80" cy="100" r="54" fill={sun} />
+      <path d="M49 63a40 40 0 0 1 14-13" fill="none" stroke="#fff" stroke-opacity="0.35" stroke-width="4" stroke-linecap="round" />
+      <ellipse cx="54" cy="77" rx="7" ry="4" fill={blush} />
+      <ellipse cx="106" cy="77" rx="7" ry="4" fill={blush} />
+      <g class="blink" fill={ink}>
+        <ellipse cx="66" cy="66" rx="4.5" ry="6" />
+        <ellipse cx="94" cy="66" rx="4.5" ry="6" />
+        <circle cx="67.6" cy="63.6" r="1.6" fill="#fff" />
+        <circle cx="95.6" cy="63.6" r="1.6" fill="#fff" />
+      </g>
+      <path d="M73 77q7 6 14 0" fill="none" stroke={ink} stroke-width="3" stroke-linecap="round" />
+    </svg>
+  )
+}
+{
+  pose === 'avatar' && (
+    <svg viewBox="0 0 32 32" class={className} aria-hidden="true">
+      <g stroke={sun} stroke-width="1.8" stroke-linecap="round">
+        {avatarRays.map((ray) => (
+          <line x1={ray.x1} y1={ray.y1} x2={ray.x2} y2={ray.y2} />
+        ))}
+      </g>
+      <circle cx="16" cy="16" r="10.5" fill={sun} />
+      <ellipse cx="10.4" cy="18.4" rx="1.9" ry="1.1" fill={blush} />
+      <ellipse cx="21.6" cy="18.4" rx="1.9" ry="1.1" fill={blush} />
+      <g class="blink" fill={ink}>
+        <circle cx="12.6" cy="14.6" r="1.7" />
+        <circle cx="19.4" cy="14.6" r="1.7" />
+      </g>
+      <path d="M13.2 18.4q2.8 2.4 5.6 0" fill="none" stroke={ink} stroke-width="1.6" stroke-linecap="round" />
+    </svg>
+  )
+}
+{
+  pose === 'face' && (
+    <svg viewBox="0 0 100 44" class={className} aria-hidden="true">
+      <ellipse cx="18" cy="29" rx="8" ry="4.5" fill="#fff" fill-opacity="0.25" />
+      <ellipse cx="82" cy="29" rx="8" ry="4.5" fill="#fff" fill-opacity="0.25" />
+      <g class="blink" fill={ink}>
+        <ellipse cx="30" cy="16" rx="4.5" ry="6" />
+        <ellipse cx="70" cy="16" rx="4.5" ry="6" />
+        <circle cx="31.6" cy="13.6" r="1.6" fill="#fff" />
+        <circle cx="71.6" cy="13.6" r="1.6" fill="#fff" />
+      </g>
+      <path d="M40 27q10 9 20 0" fill="none" stroke={ink} stroke-width="3.2" stroke-linecap="round" />
+    </svg>
+  )
+}

@@ -129,6 +129,16 @@
     animation: tick-in 0.5s var(--ease-pop) var(--d, 0s) both;
   }
 
+  /* Mascot: blinks every few seconds, and rises when the page loads. */
+  .blink {
+    transform-box: fill-box;
+    transform-origin: center;
+    animation: blink 5s infinite 2s;
+  }
+  .peek {
+    animation: peek 1.1s var(--ease-out-soft) var(--d, 0.4s) both;
+  }
+
   /* Bars that fill when their `.reveal` parent becomes visible. */
   .bar {
     width: var(--w);
@@ -170,6 +180,26 @@
   }
 }
 
+@keyframes blink {
+  0%,
+  94%,
+  100% {
+    transform: scaleY(1);
+  }
+  97% {
+    transform: scaleY(0.1);
+  }
+}
+
+@keyframes peek {
+  from {
+    transform: translateY(100%);
+  }
+  to {
+    transform: none;
+  }
+}
+
 @keyframes grow {
   from {
     width: 0;
@@ -201,7 +231,9 @@
   }
   .tick-done,
   .fill-to,
-  .pop-in {
+  .pop-in,
+  .blink,
+  .peek {
     animation: none;
   }
   .animate-spin {

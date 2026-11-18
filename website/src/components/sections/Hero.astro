@@ -2,7 +2,7 @@
 import WaitlistForm from '../WaitlistForm.astro';
 import Annotation from '../ui/Annotation.astro';
 import Icon from '../ui/Icon.astro';
-import Mark from '../ui/Mark.astro';
+import SunMascot from '../ui/SunMascot.astro';
 import HeroDashboard from '../mockups/HeroDashboard.astro';
 ---
 
@@ -46,17 +46,18 @@ import HeroDashboard from '../mockups/HeroDashboard.astro';
     </div>
 
     <div class="reveal relative mx-auto mt-16 max-w-5xl" style="--reveal-delay:320ms">
-      <div class="bg-dots rounded-4xl border border-line bg-paper-deep p-2.5 sm:p-6 lg:p-10">
+      <SunMascot pose="peek" class="peek absolute right-8 bottom-full w-28 sm:right-16 sm:w-44 lg:right-24 lg:w-48" />
+      <div class="bg-dots relative z-10 rounded-4xl border border-line bg-paper-deep p-2.5 sm:p-6 lg:p-10">
         <HeroDashboard />
       </div>
       <div
         aria-hidden="true"
-        class="pop-in absolute -right-6 -bottom-10 hidden w-72 rounded-2xl border border-line bg-white p-4 text-left shadow-float lg:block xl:-right-12"
+        class="pop-in absolute -right-6 -bottom-10 z-20 hidden w-72 rounded-2xl border border-line bg-white p-4 text-left shadow-float lg:block xl:-right-12"
         style="--d:3.8s"
       >
         <p class="flex items-center gap-2 text-xs font-medium text-ink-muted">
-          <span class="grid size-6 place-items-center rounded-lg bg-ink text-paper"><Mark class="size-3.5" /></span>
-          Assistant
+          <span class="grid size-6 place-items-center rounded-lg bg-sun-soft"><SunMascot pose="avatar" class="size-5" /></span>
+          Ori
         </p>
         <p class="mt-3 ml-auto w-fit rounded-2xl rounded-br-md bg-ink px-3 py-2 text-sm text-paper">
           Which Node version do we use?
@@ -69,13 +70,9 @@ import HeroDashboard from '../mockups/HeroDashboard.astro';
           Engineering handbook
         </p>
       </div>
-      <Annotation
-        arrow="down-right"
-        aria-hidden="true"
-        class="absolute -top-9 left-4 sm:left-6 lg:-left-4"
-      >
-        accounts ready before Monday
-      </Annotation>
+      <span aria-hidden="true" class="absolute -top-9 left-6 z-20 hidden sm:block lg:-left-4">
+        <Annotation arrow="down-right">accounts ready before Monday</Annotation>
+      </span>
     </div>
   </div>
 </section>

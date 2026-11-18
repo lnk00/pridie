@@ -48,6 +48,8 @@ Pridie creates the Google Workspace account first. The new hire's company email 
 
 The new hire can chat with an AI assistant in Pridie. The assistant answers their questions from the company's knowledge, for example the engineering handbook or the setup documentation. The admin connects each knowledge source to Pridie once.
 
+The assistant is named Ori. Its avatar is the sun from the Pridie logo, with a face.
+
 #### What the assistant knows
 
 The assistant uses two types of context:

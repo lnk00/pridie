@@ -1,5 +1,6 @@
 ---
 import WaitlistForm from '../WaitlistForm.astro';
+import SunMascot from '../ui/SunMascot.astro';
 ---
 
 <section class="px-2 pb-16 sm:px-4 sm:pb-24">
@@ -20,7 +21,9 @@ import WaitlistForm from '../WaitlistForm.astro';
       ></div>
       <div
         class="sunrise-sun absolute bottom-0 left-1/2 size-72 rounded-full bg-linear-to-b from-[#ffb08a] via-sun to-[#b8321a] sm:size-[28rem]"
-      ></div>
+      >
+        <SunMascot pose="face" class="absolute top-[17%] left-1/2 w-[44%] -translate-x-1/2" />
+      </div>
       <div class="absolute inset-x-0 bottom-0 h-px bg-white/20"></div>
     </div>
   </div>
