@@ -1,0 +1,20 @@
+---
+import Base from '../layouts/Base.astro';
+import Logo from '../components/Logo.astro';
+---
+
+<Base title="Page not found · Pridie">
+  <main class="wrap flex min-h-svh flex-col items-center justify-center py-16 text-center">
+    <a href="/" aria-label="Pridie home"><Logo /></a>
+    <h1 class="mt-12 font-display text-6xl leading-none sm:text-7xl">
+      Nothing here <em class="text-sun">yet.</em>
+    </h1>
+    <p class="mt-5 text-lg text-ink-muted">This page doesn't exist. Not even the day before.</p>
+    <a
+      href="/"
+      class="mt-8 rounded-full bg-ink px-5 py-3 text-sm font-medium text-paper transition-colors hover:bg-ink-soft"
+    >
+      Back to the home page
+    </a>
+  </main>
+</Base>

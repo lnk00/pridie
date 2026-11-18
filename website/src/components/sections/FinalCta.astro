@@ -1,0 +1,27 @@
+---
+import WaitlistForm from '../WaitlistForm.astro';
+---
+
+<section class="px-2 pb-16 sm:px-4 sm:pb-24">
+  <div class="reveal relative isolate overflow-hidden rounded-[2.5rem] bg-ink px-4 pt-20 pb-52 text-center text-paper sm:pt-28 sm:pb-72">
+    <h2 class="mx-auto max-w-3xl font-display text-5xl leading-[1] tracking-[-0.01em] text-balance sm:text-6xl lg:text-7xl">
+      Make Monday <em class="text-sun">the easy part.</em>
+    </h2>
+    <p class="mx-auto mt-5 max-w-md text-lg text-paper/70">
+      Join the waitlist for early access to Pridie.
+    </p>
+    <div class="mt-9 flex justify-center">
+      <WaitlistForm id="join-footer" tone="dark" />
+    </div>
+
+    <div aria-hidden="true" class="pointer-events-none absolute inset-x-0 bottom-0 -z-10 h-full">
+      <div
+        class="absolute bottom-0 left-1/2 h-[26rem] w-[70rem] -translate-x-1/2 translate-y-1/2 rounded-full bg-[radial-gradient(closest-side,rgb(232_70_30/0.5),transparent)]"
+      ></div>
+      <div
+        class="sunrise-sun absolute bottom-0 left-1/2 size-72 rounded-full bg-linear-to-b from-[#ffb08a] via-sun to-[#b8321a] sm:size-[28rem]"
+      ></div>
+      <div class="absolute inset-x-0 bottom-0 h-px bg-white/20"></div>
+    </div>
+  </div>
+</section>

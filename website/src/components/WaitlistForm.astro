@@ -1,0 +1,113 @@
+---
+interface Props {
+  id?: string;
+  tone?: 'light' | 'dark';
+  class?: string;
+}
+
+const { id = 'waitlist', tone = 'light', class: className } = Astro.props;
+const inputId = `${id}-email`;
+const light = tone === 'light';
+---
+
+<form id={id} data-waitlist novalidate class:list={['w-full max-w-md', className]}>
+  <div
+    class:list={[
+      'flex items-center gap-1.5 rounded-full border p-1.5 transition-shadow focus-within:ring-4',
+      light
+        ? 'border-line-strong bg-white shadow-card focus-within:border-sun/60 focus-within:ring-sun/20'
+        : 'border-white/15 bg-white/10 focus-within:border-sun/70 focus-within:ring-sun/30',
+    ]}
+  >
+    <label for={inputId} class="sr-only">Work email</label>
+    <input
+      id={inputId}
+      name="email"
+      type="email"
+      required
+      autocomplete="email"
+      placeholder="you@company.com"
+      class:list={[
+        'min-w-0 flex-1 bg-transparent py-2 pl-3.5 text-base outline-none',
+        light ? 'text-ink placeholder:text-ink-muted/70' : 'text-paper placeholder:text-paper/50',
+      ]}
+    />
+    <button
+      type="submit"
+      class:list={[
+        'shrink-0 cursor-pointer rounded-full px-4 py-2.5 text-sm font-medium transition-colors disabled:cursor-default sm:px-5',
+        light ? 'bg-ink text-paper hover:bg-ink-soft' : 'bg-paper text-ink hover:bg-white',
+      ]}
+    >
+      Join the waitlist
+    </button>
+  </div>
+  <p
+    data-message
+    role="status"
+    aria-live="polite"
+    class:list={[
+      'mt-3 min-h-5 px-4 text-sm',
+      light ? 'text-ink-soft data-[kind=error]:text-sun-deep' : 'text-paper/80 data-[kind=error]:text-[#ff9b7d]',
+    ]}
+  >
+  </p>
+</form>
+
+<script>
+  // Set PUBLIC_WAITLIST_ENDPOINT to send signups somewhere (Tally, Formspree, Loops...).
+  // Without it the form only shows its success state, which is fine in development.
+  const endpoint: string | undefined = import.meta.env.PUBLIC_WAITLIST_ENDPOINT;
+  const EMAIL = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+
+  if (!endpoint && import.meta.env.PROD) {
+    console.warn('PUBLIC_WAITLIST_ENDPOINT is not set: waitlist signups are not saved.');
+  }
+
+  for (const form of document.querySelectorAll<HTMLFormElement>('form[data-waitlist]')) {
+    const input = form.querySelector('input')!;
+    const button = form.querySelector('button')!;
+    const message = form.querySelector<HTMLElement>('[data-message]')!;
+
+    const say = (text: string, kind: 'ok' | 'error') => {
+      message.textContent = text;
+      message.dataset.kind = kind;
+    };
+
+    input.addEventListener('input', () => {
+      input.removeAttribute('aria-invalid');
+      message.textContent = '';
+    });
+
+    form.addEventListener('submit', async (event) => {
+      event.preventDefault();
+      const email = input.value.trim();
+
+      if (!EMAIL.test(email)) {
+        input.setAttribute('aria-invalid', 'true');
+        say('Please enter a valid work email.', 'error');
+        input.focus();
+        return;
+      }
+
+      button.disabled = true;
+      try {
+        if (endpoint) {
+          const response = await fetch(endpoint, {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json', Accept: 'application/json' },
+            body: JSON.stringify({ email }),
+          });
+          if (!response.ok) throw new Error(`Waitlist request failed: ${response.status}`);
+        }
+        input.disabled = true;
+        button.textContent = "You're on the list";
+        say(`Thanks! We'll write to ${email} when early access opens.`, 'ok');
+      } catch (error) {
+        console.error(error);
+        button.disabled = false;
+        say('Something went wrong. Please try again.', 'error');
+      }
+    });
+  }
+</script>

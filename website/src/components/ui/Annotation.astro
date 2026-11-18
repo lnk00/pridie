@@ -1,0 +1,53 @@
+---
+import type { HTMLAttributes } from 'astro/types';
+
+// Handwritten note with a drawn arrow, like a comment scribbled on the page.
+type Arrow = 'down-left' | 'down-right' | 'up-left' | 'up-right' | 'none';
+
+interface Props extends HTMLAttributes<'span'> {
+  arrow?: Arrow;
+  /** Where the arrow sits relative to the text. */
+  arrowSide?: 'start' | 'end';
+}
+
+const { arrow = 'down-right', arrowSide = 'end', class: className, ...attrs } = Astro.props;
+
+// The base drawing points down-left; flips give the other directions.
+const flip: Record<Arrow, string> = {
+  'down-left': '',
+  'down-right': '-scale-x-100',
+  'up-left': '-scale-y-100',
+  'up-right': '-scale-100',
+  none: '',
+};
+const isDown = arrow.startsWith('down');
+---
+
+<span
+  {...attrs}
+  class:list={[
+    'pointer-events-none inline-flex gap-1 font-hand text-[1.6rem] leading-none tracking-normal text-sun-deep not-italic select-none',
+    isDown ? 'items-start' : 'items-end',
+    arrowSide === 'start' && 'flex-row-reverse',
+    className,
+  ]}
+>
+  <span class:list={['-rotate-3 whitespace-nowrap', isDown ? 'pt-1' : 'pb-1']}><slot /></span>
+  {
+    arrow !== 'none' && (
+      <svg
+        viewBox="0 0 64 48"
+        class:list={['h-10 w-14 shrink-0', flip[arrow]]}
+        fill="none"
+        stroke="currentColor"
+        stroke-width="2"
+        stroke-linecap="round"
+        stroke-linejoin="round"
+        aria-hidden="true"
+      >
+        <path d="M58 6C42 4 20 12 12 38" />
+        <path d="M9 28l3 10 8-6" />
+      </svg>
+    )
+  }
+</span>

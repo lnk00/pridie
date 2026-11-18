@@ -1,0 +1,14 @@
+---
+import Mark from './ui/Mark.astro';
+
+interface Props {
+  class?: string;
+}
+
+const { class: className } = Astro.props;
+---
+
+<span class:list={['inline-flex items-center gap-2', className]}>
+  <Mark />
+  <span class="font-display text-[1.75rem] leading-none tracking-tight">pridie</span>
+</span>

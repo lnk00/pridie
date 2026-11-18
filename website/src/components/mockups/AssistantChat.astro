@@ -1,0 +1,86 @@
+---
+import Icon from '../ui/Icon.astro';
+import Mark from '../ui/Mark.astro';
+
+const sources = ['Engineering handbook › Local setup', 'Security policy › Secrets'];
+---
+
+<div
+  role="img"
+  aria-label="Example conversation with the Pridie assistant. Sam is on the task Set up the local environment and asks where to get the API keys. The assistant answers with two sources. Sam then asks about working from home on Fridays. The assistant says it found no answer in the documentation and suggests asking the manager."
+  class="overflow-hidden rounded-3xl border border-line bg-white text-left shadow-float"
+>
+  <div class="flex flex-wrap items-center justify-between gap-3 border-b border-line px-4 py-3 sm:px-5">
+    <div class="flex items-center gap-2.5">
+      <span class="grid size-8 place-items-center rounded-xl bg-ink text-paper">
+        <Mark class="size-4.5" />
+      </span>
+      <div>
+        <p class="text-sm leading-tight font-medium">Assistant</p>
+        <p class="text-xs text-ink-muted">Answers from your company's knowledge</p>
+      </div>
+    </div>
+    <span class="inline-flex items-center gap-1.5 rounded-full bg-sun-soft px-2.5 py-1 text-xs font-medium text-sun-deep">
+      <span class="size-1.5 rounded-full bg-sun"></span>
+      Sam · Set up the local environment
+    </span>
+  </div>
+
+  <div class="space-y-5 px-4 py-6 sm:px-6">
+    <p class="ml-auto w-fit max-w-[85%] rounded-2xl rounded-br-md bg-ink px-4 py-2.5 text-sm text-paper">
+      Where do I get the API keys for my local environment?
+    </p>
+
+    <div class="flex gap-3">
+      <span class="grid size-7 shrink-0 place-items-center rounded-lg bg-ink text-paper">
+        <Mark class="size-4" />
+      </span>
+      <div class="min-w-0 flex-1">
+        <p class="text-sm leading-relaxed text-ink-soft">
+          Run <code class="rounded-md bg-paper-deep px-1.5 py-0.5 font-mono text-[0.8125rem] text-ink">make dev-secrets</code>
+          in the backend repository. It gets the development keys with your company Google account, which is
+          already set up.
+        </p>
+        <div class="mt-3 flex flex-wrap gap-2">
+          {
+            sources.map((source) => (
+              <span class="inline-flex items-center gap-1.5 rounded-lg border border-line bg-paper/70 px-2.5 py-1 text-xs text-ink-soft">
+                <Icon name="doc" class="size-3.5 text-ink-muted" />
+                {source}
+              </span>
+            ))
+          }
+        </div>
+      </div>
+    </div>
+
+    <p class="ml-auto w-fit max-w-[85%] rounded-2xl rounded-br-md bg-ink px-4 py-2.5 text-sm text-paper">
+      Can I work from home on Fridays?
+    </p>
+
+    <div class="flex gap-3">
+      <span class="grid size-7 shrink-0 place-items-center rounded-lg bg-ink text-paper">
+        <Mark class="size-4" />
+      </span>
+      <div class="min-w-0 flex-1">
+        <p class="text-sm leading-relaxed text-ink-soft">
+          I didn't find this in your company's documentation, so I won't guess. Your manager is the best person
+          to ask.
+        </p>
+        <span class="mt-3 inline-flex items-center gap-1.5 rounded-lg border border-dashed border-line-strong px-2.5 py-1 text-xs text-ink-muted">
+          <Icon name="help" class="size-3.5" />
+          No source found
+        </span>
+      </div>
+    </div>
+  </div>
+
+  <div class="border-t border-line p-3 sm:p-4">
+    <div class="flex items-center gap-2 rounded-full border border-line bg-paper/60 py-1.5 pr-1.5 pl-4">
+      <span class="flex-1 text-sm text-ink-muted">Ask a question…</span>
+      <span class="grid size-8 place-items-center rounded-full bg-ink text-paper">
+        <Icon name="send" class="size-4" />
+      </span>
+    </div>
+  </div>
+</div>

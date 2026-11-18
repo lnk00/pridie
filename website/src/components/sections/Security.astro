@@ -1,0 +1,93 @@
+---
+import SectionHeading from '../ui/SectionHeading.astro';
+import Icon from '../ui/Icon.astro';
+import ToolLogo, { type Tool } from '../ui/ToolLogo.astro';
+
+// Only statements backed by docs/overview.md.
+// TODO: confirm before launch, then add as principles: how credentials are stored
+// (encryption at rest), OAuth scopes requested per tool, audit log of created accounts,
+// data location, and a security contact.
+// For the assistant: how it respects document access rights, which AI provider we use,
+// where company data goes, and whether the provider trains on it (open questions in the overview).
+const principles = [
+  {
+    icon: 'plug',
+    title: 'Connected once, by your admin',
+    body: 'Your admin connects each tool to Pridie one time. New hires never handle admin credentials.',
+  },
+  {
+    icon: 'user-check',
+    title: 'Only the accounts you choose',
+    body: 'Pridie creates accounts only for the tools your admin selects for each new hire.',
+  },
+] as const;
+
+const connections: { tool: Tool; name: string }[] = [
+  { tool: 'google', name: 'Google Workspace' },
+  { tool: 'slack', name: 'Slack' },
+  { tool: 'linear', name: 'Linear' },
+];
+---
+
+<section id="security" class="wrap py-24 sm:py-32">
+  <div class="grid items-center gap-12 lg:grid-cols-[1.1fr_1fr] lg:gap-20">
+    <div>
+      <SectionHeading eyebrow="Security">
+        Admin access is a big deal. <em class="text-sun">We treat it that way.</em>
+        <Fragment slot="sub">
+          To create accounts, Pridie stores credentials with admin rights on your tools. To answer
+          questions, the assistant reads your company's documentation. That is why security is a
+          requirement from the first version, not a feature for later.
+        </Fragment>
+      </SectionHeading>
+
+      <ul class="mt-10 grid gap-6 sm:grid-cols-2">
+        {
+          principles.map((principle, index) => (
+            <li class="reveal" style={`--reveal-delay:${100 + index * 100}ms`}>
+              <span class="grid size-10 place-items-center rounded-xl border border-line bg-white text-sun-deep">
+                <Icon name={principle.icon} class="size-5" />
+              </span>
+              <h3 class="mt-4 font-medium">{principle.title}</h3>
+              <p class="mt-1.5 leading-relaxed text-ink-muted">{principle.body}</p>
+            </li>
+          ))
+        }
+      </ul>
+    </div>
+
+    <div class="reveal" style="--reveal-delay:150ms">
+      <div class="bg-dots rounded-4xl border border-line bg-paper-deep p-3 sm:p-8 lg:p-10">
+        <div
+          role="img"
+          aria-label="Pridie settings showing three connected tools: Google Workspace, Slack and Linear."
+          class="mx-auto max-w-md rounded-3xl border border-line bg-white p-5 shadow-card sm:p-6"
+        >
+          <div class="flex items-center justify-between">
+            <p class="text-xs font-medium tracking-wide text-ink-muted uppercase">Connected tools</p>
+            <Icon name="lock" class="size-4 text-ink-muted" />
+          </div>
+          <ul class="mt-4 divide-y divide-line">
+            {
+              connections.map((connection) => (
+                <li class="flex items-center gap-3 py-3.5">
+                  <span class="grid size-9 place-items-center rounded-xl border border-line">
+                    <ToolLogo tool={connection.tool} class="size-4.5" />
+                  </span>
+                  <span class="flex-1 text-sm font-medium">{connection.name}</span>
+                  <span class="inline-flex items-center gap-1.5 text-xs text-sage-ink">
+                    <span class="size-1.5 rounded-full bg-sage-ink" />
+                    Connected
+                  </span>
+                </li>
+              ))
+            }
+          </ul>
+          <p class="mt-2 rounded-xl bg-paper px-3 py-2.5 text-xs leading-relaxed text-ink-muted">
+            Pridie uses these connections only to create the accounts your admin selects.
+          </p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>

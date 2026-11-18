@@ -1,0 +1,25 @@
+---
+import ToolLogo, { type Tool } from '../ui/ToolLogo.astro';
+
+const tools: { tool: Tool; name: string }[] = [
+  { tool: 'google', name: 'Google Workspace' },
+  { tool: 'slack', name: 'Slack' },
+  { tool: 'linear', name: 'Linear' },
+];
+---
+
+<section class="wrap pt-14 sm:pt-20">
+  <div class="reveal flex flex-col items-center gap-5 sm:flex-row sm:justify-center sm:gap-10">
+    <p class="text-sm text-ink-muted">First integrations</p>
+    <ul class="flex flex-wrap items-center justify-center gap-x-8 gap-y-3 text-ink-soft">
+      {
+        tools.map(({ tool, name }) => (
+          <li class="flex items-center gap-2.5">
+            <ToolLogo tool={tool} mono class="size-5" />
+            <span class="text-lg font-medium tracking-tight">{name}</span>
+          </li>
+        ))
+      }
+    </ul>
+  </div>
+</section>

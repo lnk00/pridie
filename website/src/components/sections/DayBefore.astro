@@ -1,0 +1,56 @@
+---
+import SectionHeading from '../ui/SectionHeading.astro';
+
+const steps = [
+  {
+    marker: '−1',
+    title: 'The day before',
+    body: "The admin selects Google Workspace, Slack and Linear for Sam. Pridie creates Sam's Google account and company email, then the Slack account, then sends the Linear invitation.",
+  },
+  {
+    marker: '1',
+    title: 'Day one',
+    body: 'Sam opens Pridie and finds a checklist, from accepting the Linear invitation to shipping a first small fix. When a step is unclear, Sam asks the assistant and gets an answer from the engineering handbook.',
+  },
+  {
+    marker: 'n',
+    title: 'A few hires later',
+    body: 'The admin sees that local setup takes two days on average, and that many new hires ask the assistant the same question about API keys. The team fixes the setup script.',
+  },
+];
+---
+
+<section id="how-it-works" class="px-2 sm:px-4">
+  <div class="relative overflow-hidden rounded-[2.5rem] bg-ink py-24 text-paper sm:py-32">
+    <div class="wrap">
+      <SectionHeading eyebrow="How it works" tone="dark">
+        The day before. <span class="whitespace-nowrap">Day one.</span> <em class="text-sun">Every hire after.</em>
+        <Fragment slot="sub">
+          Here is onboarding with Pridie for Sam, a backend engineer who joins on Monday.
+        </Fragment>
+      </SectionHeading>
+
+      <ol class="mt-14 grid gap-4 lg:mt-20 lg:grid-cols-3 lg:gap-5">
+        {
+          steps.map((step, index) => (
+            <li
+              class="reveal relative rounded-3xl border border-white/10 bg-white/[0.04] p-6 sm:p-7"
+              style={`--reveal-delay:${index * 120}ms`}
+            >
+              <span
+                class:list={[
+                  'grid size-12 place-items-center rounded-2xl font-display text-3xl',
+                  index === 0 ? 'bg-sun text-white' : 'bg-white/10 text-paper',
+                ]}
+              >
+                {step.marker}
+              </span>
+              <h3 class="mt-6 font-display text-3xl">{step.title}</h3>
+              <p class="mt-3 leading-relaxed text-paper/70">{step.body}</p>
+            </li>
+          ))
+        }
+      </ol>
+    </div>
+  </div>
+</section>

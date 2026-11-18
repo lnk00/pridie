@@ -1,0 +1,70 @@
+---
+import SectionHeading from '../ui/SectionHeading.astro';
+import Annotation from '../ui/Annotation.astro';
+import Icon from '../ui/Icon.astro';
+import AssistantChat from '../mockups/AssistantChat.astro';
+
+// The main difference between Pridie and other onboarding tools (see docs/overview.md).
+const points = [
+  {
+    icon: 'doc',
+    title: 'Answers with sources',
+    body: 'Every answer links to the page it comes from, so the new hire can check it.',
+  },
+  {
+    icon: 'list',
+    title: 'Knows the onboarding',
+    body: "It knows the new hire's role and the task they're on, and answers for that context.",
+  },
+  {
+    icon: 'help',
+    title: "Says when it doesn't know",
+    body: 'No source, no answer. It sends the new hire to the right person instead.',
+  },
+  {
+    icon: 'chart',
+    title: 'Shows what your docs miss',
+    body: "You see the topics it couldn't answer, so you know what to write next.",
+  },
+] as const;
+---
+
+<section id="assistant" class="px-2 sm:px-4">
+  <div class="rounded-[2.5rem] bg-linear-to-b from-sun-soft/80 via-sun-soft/30 to-paper py-24 sm:py-32">
+    <div class="wrap">
+      <SectionHeading eyebrow="The assistant" align="center">
+        Answers from everything <em class="text-sun">your team wrote down.</em>
+        <Fragment slot="sub">
+          New hires have questions all week. Pridie's assistant answers them from your company's knowledge,
+          and it knows where each new hire is in their onboarding.
+        </Fragment>
+      </SectionHeading>
+
+      <div class="reveal relative mx-auto mt-16 max-w-3xl sm:mt-20" style="--reveal-delay:120ms">
+        <AssistantChat />
+        <Annotation
+          arrow="down-left"
+          arrowSide="start"
+          aria-hidden="true"
+          class="absolute -top-11 right-2 sm:right-6"
+        >
+          knows what Sam is working on
+        </Annotation>
+      </div>
+
+      <ul class="mt-16 grid gap-x-8 gap-y-10 sm:grid-cols-2 lg:mt-20 lg:grid-cols-4">
+        {
+          points.map((point, index) => (
+            <li class="reveal" style={`--reveal-delay:${index * 80}ms`}>
+              <span class="grid size-10 place-items-center rounded-xl border border-line bg-white text-sun-deep">
+                <Icon name={point.icon} class="size-5" />
+              </span>
+              <h3 class="mt-4 font-medium">{point.title}</h3>
+              <p class="mt-1.5 leading-relaxed text-ink-muted">{point.body}</p>
+            </li>
+          ))
+        }
+      </ul>
+    </div>
+  </div>
+</section>

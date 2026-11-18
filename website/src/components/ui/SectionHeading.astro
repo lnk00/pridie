@@ -1,0 +1,42 @@
+---
+interface Props {
+  eyebrow: string;
+  number?: string;
+  align?: 'left' | 'center';
+  tone?: 'light' | 'dark';
+  class?: string;
+}
+
+const { eyebrow, number, align = 'left', tone = 'light', class: className } = Astro.props;
+---
+
+<div class:list={['reveal max-w-3xl', align === 'center' && 'mx-auto text-center', className]}>
+  <p
+    class:list={[
+      'flex items-center gap-3 text-xs font-medium tracking-[0.14em] uppercase',
+      tone === 'light' ? 'text-ink-muted' : 'text-paper/60',
+      align === 'center' && 'justify-center',
+    ]}
+  >
+    {number && <span class="font-display text-xl tracking-normal text-sun normal-case italic">{number}</span>}
+    {eyebrow}
+  </p>
+  <h2
+    class="mt-4 font-display text-[2.6rem] leading-[1.02] tracking-[-0.01em] text-balance sm:text-5xl lg:text-6xl"
+  >
+    <slot />
+  </h2>
+  {
+    Astro.slots.has('sub') && (
+      <div
+        class:list={[
+          'mt-5 text-lg leading-relaxed text-pretty',
+          tone === 'light' ? 'text-ink-muted' : 'text-paper/70',
+          align === 'center' && 'mx-auto max-w-2xl',
+        ]}
+      >
+        <slot name="sub" />
+      </div>
+    )
+  }
+</div>

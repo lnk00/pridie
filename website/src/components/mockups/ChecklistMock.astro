@@ -1,0 +1,60 @@
+---
+import Icon from '../ui/Icon.astro';
+
+const tasks = [
+  { title: 'Accept your Linear invitation', tag: 'Accounts', tone: 'bg-sky text-sky-ink', done: true },
+  { title: 'Read the engineering handbook', tag: 'Docs', tone: 'bg-butter text-butter-ink', done: true },
+  { title: 'Set up the local environment', tag: 'Setup', tone: 'bg-sun-soft text-sun-deep', done: false, open: true },
+  { title: 'Ship a first small fix', tag: 'Code', tone: 'bg-sage text-sage-ink', done: false },
+  { title: 'Meet your manager', tag: 'People', tone: 'bg-paper-deep text-ink-soft', done: false },
+];
+const doneCount = tasks.filter((task) => task.done).length;
+---
+
+<div
+  role="img"
+  aria-label="Sam's first-week checklist: two of five tasks done. The open task, set up the local environment, shows what the company expects."
+  class="rounded-3xl border border-line bg-white p-5 shadow-card sm:p-6"
+>
+  <div class="flex items-baseline justify-between gap-4">
+    <p class="font-display text-2xl">Sam's first week</p>
+    <p class="text-xs text-ink-muted">{doneCount} of {tasks.length} done</p>
+  </div>
+  <div class="mt-3 h-1.5 overflow-hidden rounded-full bg-paper-deep">
+    <div class="h-full rounded-full bg-sun" style={`width:${(doneCount / tasks.length) * 100}%`}></div>
+  </div>
+
+  <ul class="mt-4 space-y-1.5">
+    {
+      tasks.map((task) => (
+        <li class:list={['rounded-2xl', task.open && 'border border-line bg-paper/70 p-1']}>
+          <div class="flex items-center gap-3 px-2.5 py-2">
+            {task.done ? (
+              <span class="grid size-5 shrink-0 place-items-center rounded-full bg-ink text-paper">
+                <Icon name="check" class="size-3" strokeWidth={3} />
+              </span>
+            ) : (
+              <span class="size-5 shrink-0 rounded-full border-[1.5px] border-line-strong bg-white" />
+            )}
+            <span class:list={['min-w-0 flex-1 truncate text-sm', task.done && 'text-ink-muted line-through decoration-ink-muted/40']}>
+              {task.title}
+            </span>
+            <span class:list={['hidden shrink-0 rounded-full px-2 py-0.5 text-[0.6875rem] font-medium sm:inline', task.tone]}>
+              {task.tag}
+            </span>
+          </div>
+          {task.open && (
+            <div class="mx-2.5 mb-2 rounded-xl bg-white p-3 text-xs leading-relaxed shadow-[0_1px_2px_rgb(26_25_24/0.05)]">
+              <p class="font-medium text-ink">What we expect</p>
+              <p class="mt-1 text-ink-muted">The app runs on your machine and the test suite passes.</p>
+              <div class="mt-3 flex items-center justify-between gap-3">
+                <span class="text-ink-muted">Average: 2 days</span>
+                <span class="rounded-full bg-ink px-3 py-1.5 font-medium text-paper">Mark as done</span>
+              </div>
+            </div>
+          )}
+        </li>
+      ))
+    }
+  </ul>
+</div>

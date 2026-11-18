@@ -1,0 +1,121 @@
+---
+import Icon from '../ui/Icon.astro';
+import ToolLogo, { type Tool } from '../ui/ToolLogo.astro';
+
+// Sam's view on day one. Statuses flip from "pending" to "done" on load.
+const accounts: { tool: Tool; name: string; pending: string; done: string; tone: string; delay: string }[] = [
+  { tool: 'google', name: 'Google Workspace', pending: 'Creating', done: 'Created', tone: 'bg-sage text-sage-ink', delay: '0.9s' },
+  { tool: 'slack', name: 'Slack', pending: 'Creating', done: 'Created', tone: 'bg-sage text-sage-ink', delay: '1.6s' },
+  { tool: 'linear', name: 'Linear', pending: 'Inviting', done: 'Invitation sent', tone: 'bg-sky text-sky-ink', delay: '2.3s' },
+];
+
+const tasks = [
+  'Accept your Linear invitation',
+  'Read the engineering handbook',
+  'Set up the local environment',
+  'Ship a first small fix',
+  'Meet your manager',
+];
+const firstTaskDelay = '3.1s';
+---
+
+<div
+  role="img"
+  aria-label="Pridie dashboard for Sam, a new backend engineer: Google Workspace and Slack accounts created, Linear invitation sent, and a five-task checklist for the first week."
+  class="overflow-hidden rounded-3xl border border-line bg-white text-left shadow-float"
+>
+  <div class="flex items-center gap-3 border-b border-line px-4 py-3 sm:px-5">
+    <div class="flex gap-1.5">
+      <span class="size-2.5 rounded-full bg-line-strong"></span>
+      <span class="size-2.5 rounded-full bg-line-strong"></span>
+      <span class="size-2.5 rounded-full bg-line-strong"></span>
+    </div>
+    <p class="text-xs text-ink-muted">
+      New hires <span class="px-1 text-ink-muted/60">/</span> <span class="text-ink">Sam</span>
+    </p>
+  </div>
+
+  <div class="p-4 sm:p-6 lg:p-7">
+    <div class="flex flex-wrap items-center justify-between gap-3">
+      <div class="flex items-center gap-3">
+        <span class="grid size-11 place-items-center rounded-full bg-sky font-display text-xl text-sky-ink">S</span>
+        <div>
+          <p class="font-medium">Sam</p>
+          <p class="text-sm text-ink-muted">Backend engineer · Starts Monday</p>
+        </div>
+      </div>
+      <span class="tick text-xs font-medium" style={`--d:${accounts[2].delay}`}>
+        <span class="tick-pending inline-flex items-center gap-1.5 rounded-full bg-paper-deep px-3 py-1.5 text-ink-muted">
+          <span class="size-1.5 rounded-full bg-ink-muted/60"></span>Setting up
+        </span>
+        <span class="tick-done inline-flex items-center gap-1.5 rounded-full bg-sun-soft px-3 py-1.5 text-sun-deep">
+          <span class="size-1.5 rounded-full bg-sun"></span>Ready for Monday
+        </span>
+      </span>
+    </div>
+
+    <div class="mt-6 grid gap-4 md:grid-cols-[1fr_1.2fr]">
+      <section class="flex flex-col rounded-2xl border border-line bg-paper/60 p-4">
+        <p class="text-xs font-medium tracking-wide text-ink-muted uppercase">Accounts</p>
+        <ul class="mt-3 space-y-2">
+          {
+            accounts.map((account) => (
+              <li class="flex items-center gap-3 rounded-xl bg-white px-3 py-2.5 shadow-[0_1px_2px_rgb(26_25_24/0.05)]">
+                <span class="grid size-8 shrink-0 place-items-center rounded-lg border border-line bg-white">
+                  <ToolLogo tool={account.tool} class="size-4" />
+                </span>
+                <span class="min-w-0 flex-1">
+                  <span class="block truncate text-sm font-medium">{account.name}</span>
+                  <span class="block truncate text-xs text-ink-muted">sam@acme.dev</span>
+                </span>
+                <span class="tick justify-items-end text-xs font-medium" style={`--d:${account.delay}`}>
+                  <span class="tick-pending inline-flex items-center gap-1.5 text-ink-muted">
+                    <span class="size-3 animate-spin rounded-full border-[1.5px] border-current border-r-transparent" />
+                    {account.pending}
+                  </span>
+                  <span class:list={['tick-done inline-flex items-center gap-1 rounded-full px-2 py-1', account.tone]}>
+                    <Icon name={account.tool === 'linear' ? 'mail' : 'check'} class="size-3.5" strokeWidth={2.5} />
+                    {account.done}
+                  </span>
+                </span>
+              </li>
+            ))
+          }
+        </ul>
+        <p class="mt-auto pt-4 text-xs text-ink-muted">Created by Pridie the day before.</p>
+      </section>
+
+      <section class="rounded-2xl border border-line p-4">
+        <div class="flex items-baseline justify-between">
+          <p class="text-xs font-medium tracking-wide text-ink-muted uppercase">Your first week</p>
+          <p class="tick justify-items-end text-xs text-ink-muted" style={`--d:${firstTaskDelay}`}>
+            <span class="tick-pending">0 of 5 done</span>
+            <span class="tick-done">1 of 5 done</span>
+          </p>
+        </div>
+        <div class="mt-3 h-1.5 overflow-hidden rounded-full bg-paper-deep">
+          <div class="fill-to h-full rounded-full bg-sun" style={`--to:20%;--d:${firstTaskDelay}`}></div>
+        </div>
+        <ul class="mt-3 divide-y divide-line">
+          {
+            tasks.map((task, index) => (
+              <li class="flex items-center gap-3 py-2.5">
+                {index === 0 ? (
+                  <span class="tick size-5 shrink-0" style={`--d:${firstTaskDelay}`}>
+                    <span class="tick-pending size-5 rounded-full border-[1.5px] border-line-strong" />
+                    <span class="tick-done grid size-5 place-items-center rounded-full bg-ink text-paper">
+                      <Icon name="check" class="size-3" strokeWidth={3} />
+                    </span>
+                  </span>
+                ) : (
+                  <span class="size-5 shrink-0 rounded-full border-[1.5px] border-line-strong" />
+                )}
+                <span class="text-sm">{task}</span>
+              </li>
+            ))
+          }
+        </ul>
+      </section>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,81 @@
+---
+import WaitlistForm from '../WaitlistForm.astro';
+import Annotation from '../ui/Annotation.astro';
+import Icon from '../ui/Icon.astro';
+import Mark from '../ui/Mark.astro';
+import HeroDashboard from '../mockups/HeroDashboard.astro';
+---
+
+<section class="pt-12 sm:pt-20 lg:pt-24">
+  <div class="wrap">
+    <div class="mx-auto max-w-4xl text-center">
+      <p
+        class="reveal inline-flex items-center gap-2 rounded-full border border-line bg-white/60 px-3.5 py-1.5 text-sm text-ink-soft"
+      >
+        <span class="size-1.5 rounded-full bg-sun"></span>
+        Onboarding for tech teams · Early access
+      </p>
+
+      <h1
+        class="reveal mt-7 font-display text-[3.5rem] leading-[0.95] tracking-[-0.02em] text-balance sm:text-7xl lg:text-[6.5rem]"
+        style="--reveal-delay:80ms"
+      >
+        Everything ready <em class="relative text-sun">
+          the day before.
+          <span aria-hidden="true" class="absolute top-full right-0 mt-1 hidden translate-x-1/4 lg:flex">
+            <Annotation arrow="up-left" arrowSide="start">
+              pridie (lat.): the day before
+            </Annotation>
+          </span>
+        </em>
+      </h1>
+
+      <p
+        class="reveal mx-auto mt-7 max-w-2xl text-lg leading-relaxed text-pretty text-ink-muted sm:text-xl lg:mt-16"
+        style="--reveal-delay:160ms"
+      >
+        Pridie sets up your new hire's accounts, gives them a clear checklist, and answers their
+        questions from your company's knowledge. They start with access and answers, not a list of
+        people to ask.
+      </p>
+
+      <div class="reveal mt-8 flex flex-col items-center" style="--reveal-delay:240ms">
+        <WaitlistForm id="join" />
+        <p class="font-hand text-xl text-ink-muted lg:hidden">pridie (lat.): the day before</p>
+      </div>
+    </div>
+
+    <div class="reveal relative mx-auto mt-16 max-w-5xl" style="--reveal-delay:320ms">
+      <div class="bg-dots rounded-4xl border border-line bg-paper-deep p-2.5 sm:p-6 lg:p-10">
+        <HeroDashboard />
+      </div>
+      <div
+        aria-hidden="true"
+        class="pop-in absolute -right-6 -bottom-10 hidden w-72 rounded-2xl border border-line bg-white p-4 text-left shadow-float lg:block xl:-right-12"
+        style="--d:3.8s"
+      >
+        <p class="flex items-center gap-2 text-xs font-medium text-ink-muted">
+          <span class="grid size-6 place-items-center rounded-lg bg-ink text-paper"><Mark class="size-3.5" /></span>
+          Assistant
+        </p>
+        <p class="mt-3 ml-auto w-fit rounded-2xl rounded-br-md bg-ink px-3 py-2 text-sm text-paper">
+          Which Node version do we use?
+        </p>
+        <p class="mt-2.5 text-sm leading-relaxed text-ink-soft">
+          Node 22. It's pinned in <code class="rounded bg-paper-deep px-1 py-0.5 font-mono text-xs text-ink">.nvmrc</code> in the backend repository.
+        </p>
+        <p class="mt-2 inline-flex items-center gap-1.5 text-xs text-ink-muted">
+          <Icon name="doc" class="size-3.5" />
+          Engineering handbook
+        </p>
+      </div>
+      <Annotation
+        arrow="down-right"
+        aria-hidden="true"
+        class="absolute -top-9 left-4 sm:left-6 lg:-left-4"
+      >
+        accounts ready before Monday
+      </Annotation>
+    </div>
+  </div>
+</section>

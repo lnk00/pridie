@@ -1,0 +1,113 @@
+---
+import SectionHeading from '../ui/SectionHeading.astro';
+import Annotation from '../ui/Annotation.astro';
+import Icon from '../ui/Icon.astro';
+import ProvisioningMock from '../mockups/ProvisioningMock.astro';
+import ChecklistMock from '../mockups/ChecklistMock.astro';
+import InsightsMock from '../mockups/InsightsMock.astro';
+
+const features = [
+  {
+    number: '01',
+    label: 'Accounts',
+    title: 'Accounts, created',
+    accent: 'before they arrive.',
+    body: "Connect Google Workspace, Slack and Linear to Pridie once. For each new hire, pick the tools they need. Pridie creates the accounts through each tool's API.",
+    points: [
+      'Google Workspace first: it creates the company email.',
+      'Slack and Linear use that email.',
+      'No access requests on day one.',
+    ],
+    note: 'Google first, then the rest',
+    mock: ProvisioningMock,
+  },
+  {
+    number: '02',
+    label: 'Checklist',
+    title: 'A checklist that says',
+    accent: "what's expected.",
+    body: 'The new hire gets a list of tasks: what to do, and what the company expects from them. They check each task when it is done.',
+    points: [
+      'Technical tasks and the usual ones, in one list.',
+      'Clear expectations for every task.',
+      'Progress the admin can follow.',
+    ],
+    note: 'no more guessing',
+    mock: ChecklistMock,
+  },
+  {
+    number: '03',
+    label: 'Insights',
+    title: 'See where onboarding',
+    accent: 'slows down.',
+    body: 'Pridie shows where new hires spend the most time and where they get stuck. Fix it once, and every next hire benefits.',
+    points: [
+      'Time spent on each task.',
+      'The steps where new hires get blocked.',
+      "Topics your docs don't cover yet.",
+    ],
+    note: 'time to fix the setup script',
+    mock: InsightsMock,
+  },
+];
+---
+
+<section id="product" class="pb-24 sm:pb-32">
+  <div class="wrap">
+    <SectionHeading eyebrow="Product" align="center">
+      Set up once. <em class="text-sun">Ready every time.</em>
+      <Fragment slot="sub">
+        Around the assistant, Pridie creates the accounts, guides the new hire with a checklist, and
+        shows you what to improve.
+      </Fragment>
+    </SectionHeading>
+
+    <div class="mt-16 space-y-24 sm:mt-24 lg:space-y-32">
+      {
+        features.map((feature, index) => {
+          const Mock = feature.mock;
+          const flipped = index % 2 === 1;
+          return (
+            <article class="grid items-center gap-10 lg:grid-cols-2 lg:gap-16">
+              <div class:list={['reveal', flipped && 'lg:order-2']}>
+                <p class="flex items-center gap-3 text-xs font-medium tracking-[0.14em] text-ink-muted uppercase">
+                  <span class="font-display text-xl tracking-normal text-sun normal-case italic">{feature.number}</span>
+                  {feature.label}
+                </p>
+                <h3 class="mt-4 font-display text-4xl leading-[1.05] text-balance sm:text-5xl">
+                  {feature.title} <em class="text-sun">{feature.accent}</em>
+                </h3>
+                <p class="mt-5 max-w-lg text-lg leading-relaxed text-pretty text-ink-muted">{feature.body}</p>
+                <ul class="mt-6 space-y-3">
+                  {feature.points.map((point) => (
+                    <li class="flex gap-3 text-ink-soft">
+                      <span class="mt-0.5 grid size-5 shrink-0 place-items-center rounded-full bg-sun-soft text-sun-deep">
+                        <Icon name="check" class="size-3" strokeWidth={3} />
+                      </span>
+                      {point}
+                    </li>
+                  ))}
+                </ul>
+              </div>
+              <div class:list={['reveal relative', flipped && 'lg:order-1']} style="--reveal-delay:120ms">
+                <div class="bg-dots rounded-4xl border border-line bg-paper-deep p-3 sm:p-8 lg:p-10">
+                  <div class="mx-auto max-w-md">
+                    <Mock />
+                  </div>
+                </div>
+                <Annotation
+                  arrow={flipped ? 'down-left' : 'down-right'}
+                  arrowSide={flipped ? 'start' : 'end'}
+                  aria-hidden="true"
+                  class:list={['absolute -top-8', flipped ? 'right-8' : 'left-8']}
+                >
+                  {feature.note}
+                </Annotation>
+              </div>
+            </article>
+          );
+        })
+      }
+    </div>
+  </div>
+</section>

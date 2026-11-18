@@ -1,0 +1,60 @@
+---
+import SectionHeading from '../ui/SectionHeading.astro';
+import Icon from '../ui/Icon.astro';
+
+// Answers stay within what docs/overview.md states. Open questions are not answered here.
+const faqs = [
+  {
+    question: 'Is Pridie available today?',
+    answer: "Not yet. Pridie is in development. Join the waitlist and we'll let you know when early access opens.",
+  },
+  {
+    question: 'Which tools can Pridie create accounts in?',
+    answer: "At launch: Google Workspace, Slack and Linear. Pridie creates the accounts through each tool's API.",
+  },
+  {
+    question: 'Where does the assistant find its answers?',
+    answer: 'In the company knowledge that your admin connects to Pridie, such as your documentation and handbooks. Each answer shows its sources, so the new hire can check it.',
+  },
+  {
+    question: 'Why does Google Workspace come first?',
+    answer: 'The Google Workspace account gives the new hire their company email. Slack and Linear then use that email.',
+  },
+  {
+    question: 'Does the Slack integration work on every Slack plan?',
+    answer: "No. Pridie creates Slack members through Slack's SCIM API, which Slack offers only on the Business+ and Enterprise Grid plans.",
+  },
+  {
+    question: 'Does the new hire get a Linear account right away?',
+    answer: "Pridie sends a Linear invitation to the new hire's company email. The new hire accepts it, and it's the first task on their checklist.",
+  },
+  {
+    question: 'Does a new account add to our bills?',
+    answer: 'It depends on your plan with each tool. For example, on a Google Workspace flexible plan, each new user adds a charge to your Google bill.',
+  },
+];
+---
+
+<section id="faq" class="wrap pb-24 sm:pb-32">
+  <div class="grid gap-10 lg:grid-cols-[1fr_1.5fr] lg:gap-20">
+    <SectionHeading eyebrow="FAQ">
+      Questions, <em class="text-sun">answered.</em>
+    </SectionHeading>
+
+    <div class="reveal border-b border-line" style="--reveal-delay:100ms">
+      {
+        faqs.map((faq) => (
+          <details class="group border-t border-line">
+            <summary class="flex cursor-pointer list-none items-center justify-between gap-6 py-5 text-lg font-medium [&::-webkit-details-marker]:hidden">
+              {faq.question}
+              <span class="grid size-8 shrink-0 place-items-center rounded-full border border-line text-ink-muted transition-transform duration-300 group-open:rotate-45">
+                <Icon name="plus" class="size-4" />
+              </span>
+            </summary>
+            <p class="max-w-2xl pb-6 leading-relaxed text-ink-muted">{faq.answer}</p>
+          </details>
+        ))
+      }
+    </div>
+  </div>
+</section>

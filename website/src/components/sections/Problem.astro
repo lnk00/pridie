@@ -1,0 +1,76 @@
+---
+import SectionHeading from '../ui/SectionHeading.astro';
+import Icon from '../ui/Icon.astro';
+---
+
+<section class="wrap py-24 sm:py-32">
+  <SectionHeading eyebrow="The problem">
+    A first week shouldn't be spent <em class="text-sun">asking around.</em>
+  </SectionHeading>
+
+  <div class="mt-12 grid gap-4 sm:grid-cols-2 lg:mt-16 lg:grid-cols-3 lg:gap-5">
+    <article class="reveal rounded-3xl border border-line bg-white p-5 sm:p-6">
+      <div aria-hidden="true" class="flex h-44 flex-col justify-center gap-2 rounded-2xl bg-paper-deep p-4">
+        <p class="max-w-[85%] self-start rounded-2xl rounded-bl-md bg-white px-3 py-2 text-sm shadow-[0_1px_2px_rgb(26_25_24/0.06)]">
+          Hi! Who can add me to Linear?
+        </p>
+        <p class="max-w-[85%] self-start rounded-2xl rounded-bl-md bg-white px-3 py-2 text-sm shadow-[0_1px_2px_rgb(26_25_24/0.06)]">
+          Also, still no Slack access…
+        </p>
+        <p class="self-end rounded-2xl rounded-br-md bg-ink/85 px-3 py-2 text-sm text-paper">Ask IT?</p>
+      </div>
+      <h3 class="mt-6 font-display text-[1.75rem] leading-tight">Access lives in DMs</h3>
+      <p class="mt-2 leading-relaxed text-ink-muted">
+        The new hire asks around for every tool. Someone forgets one. The first week starts with
+        waiting.
+      </p>
+    </article>
+
+    <article class="reveal rounded-3xl border border-line bg-white p-5 sm:p-6" style="--reveal-delay:100ms">
+      <div aria-hidden="true" class="flex h-44 flex-col justify-center rounded-2xl bg-paper-deep p-4">
+        <div class="rounded-xl bg-white p-3 shadow-[0_1px_2px_rgb(26_25_24/0.06)]">
+          <p class="flex items-center gap-2 rounded-lg border border-line px-2.5 py-1.5 text-sm text-ink-muted">
+            <Icon name="search" class="size-4" />
+            api keys local setup
+          </p>
+          <ul class="mt-2 space-y-1.5 px-1 font-mono text-xs">
+            <li>Local setup (old)</li>
+            <li>Local setup v2</li>
+            <li class="flex items-center justify-between gap-2">
+              Local setup v2 FINAL
+              <span class="rounded bg-sun-soft px-1.5 font-sans text-sun-deep">which one?</span>
+            </li>
+          </ul>
+        </div>
+      </div>
+      <h3 class="mt-6 font-display text-[1.75rem] leading-tight">Answers are buried</h3>
+      <p class="mt-2 leading-relaxed text-ink-muted">
+        The answer is somewhere: a doc, a wiki page, an old thread. The new hire doesn't know where to
+        look, so they ask around or they guess.
+      </p>
+    </article>
+
+    <article class="reveal rounded-3xl border border-line bg-white p-5 sm:col-span-2 sm:p-6 lg:col-span-1" style="--reveal-delay:200ms">
+      <div aria-hidden="true" class="flex h-44 flex-col justify-center gap-3.5 rounded-2xl bg-paper-deep p-4">
+        {
+          ['bg-sky', 'bg-butter', 'bg-sage'].map((tone, index) => (
+            <div class="flex items-center gap-3">
+              <span class:list={['size-6 shrink-0 rounded-full', tone]} />
+              <div class="relative h-2 flex-1 rounded-full bg-white">
+                <div class="h-full w-[48%] rounded-full bg-ink/25" />
+                <span class="absolute top-1/2 left-[48%] grid size-5 -translate-x-1/2 -translate-y-1/2 place-items-center rounded-full bg-white text-[0.6875rem] font-semibold text-sun-deep shadow-[0_1px_3px_rgb(26_25_24/0.15)]">
+                  ?
+                </span>
+              </div>
+              <span class="w-12 text-right text-[0.6875rem] text-ink-muted">Hire {index + 1}</span>
+            </div>
+          ))
+        }
+      </div>
+      <h3 class="mt-6 font-display text-[1.75rem] leading-tight">Nobody sees the bottleneck</h3>
+      <p class="mt-2 leading-relaxed text-ink-muted">
+        New hires get stuck at the same step, one after another. The team never finds out.
+      </p>
+    </article>
+  </div>
+</section>

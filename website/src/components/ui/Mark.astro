@@ -1,0 +1,13 @@
+---
+// The Pridie mark: a sun rising over the horizon. The horizon uses currentColor.
+interface Props {
+  class?: string;
+}
+
+const { class: className = 'size-6' } = Astro.props;
+---
+
+<svg viewBox="0 0 24 24" class={className} aria-hidden="true">
+  <path d="M5 17a7 7 0 0 1 14 0z" class="fill-sun"></path>
+  <rect x="2" y="18.75" width="20" height="2" rx="1" fill="currentColor"></rect>
+</svg>
