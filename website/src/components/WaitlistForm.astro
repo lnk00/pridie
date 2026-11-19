@@ -55,7 +55,7 @@ const light = tone === 'light';
 </form>
 
 <script>
-  // Set PUBLIC_WAITLIST_ENDPOINT to send signups somewhere (Tally, Formspree, Loops...).
+  // Set PUBLIC_WAITLIST_ENDPOINT to the Loops form endpoint (Loops > Forms > Settings).
   // Without it the form only shows its success state, which is fine in development.
   const endpoint: string | undefined = import.meta.env.PUBLIC_WAITLIST_ENDPOINT;
   const EMAIL = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
@@ -93,12 +93,21 @@ const light = tone === 'light';
       button.disabled = true;
       try {
         if (endpoint) {
+          // Loops wants a URL-encoded body and answers with { success, message }.
           const response = await fetch(endpoint, {
             method: 'POST',
-            headers: { 'Content-Type': 'application/json', Accept: 'application/json' },
-            body: JSON.stringify({ email }),
+            headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
+            body: new URLSearchParams({ email, source: 'Website waitlist' }),
           });
-          if (!response.ok) throw new Error(`Waitlist request failed: ${response.status}`);
+          if (response.status === 429) {
+            button.disabled = false;
+            say('Too many attempts. Please wait a minute and try again.', 'error');
+            return;
+          }
+          const data: { success?: boolean; message?: string } = await response.json().catch(() => ({}));
+          if (!response.ok || !data.success) {
+            throw new Error(`Waitlist request failed: ${response.status} ${data.message ?? ''}`);
+          }
         }
         input.disabled = true;
         button.textContent = "You're on the list";

@@ -15,8 +15,10 @@ npx astro check   # type check
 
 ## Waitlist
 
-Copy `.env.example` to `.env` and set `PUBLIC_WAITLIST_ENDPOINT` to a URL that accepts a JSON POST `{ "email": "..." }` (Tally, Formspree, Loops, your own API).
+Signups go to [Loops](https://app.loops.so). Copy `.env.example` to `.env` and set `PUBLIC_WAITLIST_ENDPOINT` to the Loops form endpoint (Loops > Forms > Settings). Set the same variable on the host before you deploy.
 Without it, the form only shows its success state and **signups are not saved**. Do not deploy without it.
+
+Each signup arrives in Loops with the source "Website waitlist". Loops limits submissions to about one per minute per visitor: wait between test submissions.
 
 ## Where things are
 
