@@ -90,11 +90,14 @@ const features = [
                 </ul>
               </div>
               <div class:list={['reveal relative', flipped && 'lg:order-1']} style="--reveal-delay:120ms">
-                <div class="bg-dots rounded-4xl border border-line bg-paper-deep p-3 sm:p-8 lg:p-10">
-                  <div class="mx-auto max-w-md">
-                    <OriNote class="mb-4">{feature.note}</OriNote>
-                    <Mock />
-                  </div>
+                <div
+                  class:list={[
+                    'bg-dots mx-auto box-content max-w-md rounded-4xl border border-line bg-paper-deep p-3 sm:p-8 lg:p-10',
+                    flipped ? 'lg:ml-0' : 'lg:mr-0',
+                  ]}
+                >
+                  <OriNote class="mb-4">{feature.note}</OriNote>
+                  <Mock />
                 </div>
               </div>
             </article>
